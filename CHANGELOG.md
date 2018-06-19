@@ -1,3 +1,13 @@
+# 2.0.0
+
+* Add `airbrake` hook
+* Add `rotatelog` hook
+* Add `lfslog` hook
+* Add `Close` method for Hook interface
+* Add `Exit` for logger
+* Add `NewEntryHandler`
+* Update test case
+
 # 1.0.5
 
 * Fix hooks race (#707)
