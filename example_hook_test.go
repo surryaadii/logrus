@@ -1,8 +1,8 @@
 package logrus_test
 
 import (
-	"github.com/sirupsen/logrus"
-	"gopkg.in/gemnasium/logrus-airbrake-hook.v2"
+	"github.com/jefurry/logrus"
+	"github.com/jefurry/logrus/hooks/airbrake"
 	"os"
 )
 
