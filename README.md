@@ -241,7 +241,7 @@ func init() {
 ```
 Note: Syslog hook also support connecting to local syslog (Ex. "/dev/log" or "/var/run/syslog" or "/var/run/log"). For the detail, please check the [syslog hook README](hooks/syslog/README.md).
 
-A list of currently known of service hook can be found in this wiki [page](https://github.com/jefurry/logrus/wiki/Hooks)
+A list of currently known of service hook can be found in this wiki [page](https://github.com/sirupsen/logrus/wiki/Hooks)
 
 
 #### Level logging
