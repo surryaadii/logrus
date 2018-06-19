@@ -78,21 +78,22 @@ func New(newEntryHandlers ...NewEntryHandler) *Logger {
 	}
 }
 
-// Set New Entry Handlers
-func (logger *Logger) SetNewEntryHandlers(newEntryHandlers ...NewEntryHandler) {
-	logger.newEntryHandlers = newEntryHandlers
-}
-
 func (logger *Logger) newEntry() *Entry {
 	entry, ok := logger.entryPool.Get().(*Entry)
 	if ok {
 		return entry
 	}
+
 	return NewEntry(logger, logger.newEntryHandlers...)
 }
 
 func (logger *Logger) releaseEntry(entry *Entry) {
 	logger.entryPool.Put(entry)
+}
+
+// Set New Entry Handlers
+func (logger *Logger) SetNewEntryHandlers(newEntryHandlers ...NewEntryHandler) {
+	logger.newEntryHandlers = newEntryHandlers
 }
 
 // Adds a field to the log entry, note that it doesn't log until you call

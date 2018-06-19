@@ -52,11 +52,7 @@ func NewEntry(logger *Logger, newEntryHandlers ...NewEntryHandler) *Entry {
 		Data: make(Fields, 5),
 	}
 
-	if newEntryHandlers != nil && len(newEntryHandlers) > 0 {
-		for _, handler := range newEntryHandlers {
-			handler(entry)
-		}
-	}
+	entry.runNewHandler(entry, newEntryHandlers...)
 
 	return entry
 }
@@ -91,7 +87,20 @@ func (entry *Entry) WithFields(fields Fields) *Entry {
 	for k, v := range fields {
 		data[k] = v
 	}
-	return &Entry{Logger: entry.Logger, Data: data}
+
+	newEntry := &Entry{Logger: entry.Logger, Data: data}
+	entry.runNewHandler(newEntry, entry.Logger.newEntryHandlers...)
+
+	return newEntry
+}
+
+// Run new entrn handler
+func (entry *Entry) runNewHandler(e *Entry, newEntryHandlers ...NewEntryHandler) {
+	if newEntryHandlers != nil && len(newEntryHandlers) > 0 {
+		for _, handler := range newEntryHandlers {
+			handler(e)
+		}
+	}
 }
 
 // This function is not declared with a pointer value because otherwise
