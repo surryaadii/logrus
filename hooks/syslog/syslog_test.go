@@ -4,12 +4,12 @@ import (
 	"log/syslog"
 	"testing"
 
-	"github.com/sirupsen/logrus"
+	"github.com/jefurry/logrus"
 )
 
 func TestLocalhostAddAndPrint(t *testing.T) {
 	log := logrus.New()
-	hook, err := NewSyslogHook("udp", "localhost:514", syslog.LOG_INFO, "")
+	hook, err := NewHook("udp", "localhost:514", syslog.LOG_INFO, "")
 
 	if err != nil {
 		t.Errorf("Unable to connect to local syslog.")
