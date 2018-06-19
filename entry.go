@@ -45,12 +45,20 @@ type Entry struct {
 	Buffer *bytes.Buffer
 }
 
-func NewEntry(logger *Logger) *Entry {
-	return &Entry{
+func NewEntry(logger *Logger, newHandlers ...NewHandler) *Entry {
+	entry := &Entry{
 		Logger: logger,
 		// Default is five fields, give a little extra room
 		Data: make(Fields, 5),
 	}
+
+	if newHandlers != nil && len(newHandlers) > 0 {
+		for _, newHandler := range newHandlers {
+			newHandler(entry)
+		}
+	}
+
+	return entry
 }
 
 // Returns the string representation from the reader and ultimately the
