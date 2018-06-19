@@ -1,3 +1,7 @@
+# 2.0.1
+
+* Fix Entry WithFields bugs
+
 # 2.0.0
 
 * Add `airbrake` hook
