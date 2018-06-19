@@ -4,7 +4,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/sirupsen/logrus"
+	"github.com/jefurry/logrus"
 	"github.com/stretchr/testify/assert"
 )
 
