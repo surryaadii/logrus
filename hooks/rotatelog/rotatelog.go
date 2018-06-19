@@ -43,21 +43,21 @@ func New(p string, options ...Option) (*RotateLog, error) {
 
 	for _, o := range options {
 		switch o.Name() {
-		case optkeyClock:
+		case OptKeyClock:
 			clock = o.Value().(Clock)
-		case optkeyLinkName:
+		case OptKeyLinkName:
 			linkName = o.Value().(string)
-		case optkeyMaxAge:
+		case OptKeyMaxAge:
 			maxAge = o.Value().(time.Duration)
 			if maxAge < 0 {
 				maxAge = 0
 			}
-		case optkeyRotationTime:
+		case OptKeyRotationTime:
 			rotationTime = o.Value().(time.Duration)
 			if rotationTime < 0 {
 				rotationTime = 0
 			}
-		case optkeyRotationCount:
+		case OptKeyRotationCount:
 			rotationCount = o.Value().(uint)
 		}
 	}
