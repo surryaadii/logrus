@@ -7,7 +7,7 @@ import (
 )
 
 // Used to initialization `Entry`.
-type NewHandler func(*Entry)
+type NewEntryHandler func(*Entry)
 
 // Fields type, used to pass to `WithFields`.
 type Fields map[string]interface{}

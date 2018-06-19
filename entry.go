@@ -45,16 +45,16 @@ type Entry struct {
 	Buffer *bytes.Buffer
 }
 
-func NewEntry(logger *Logger, newHandlers ...NewHandler) *Entry {
+func NewEntry(logger *Logger, newEntryHandlers ...NewEntryHandler) *Entry {
 	entry := &Entry{
 		Logger: logger,
 		// Default is five fields, give a little extra room
 		Data: make(Fields, 5),
 	}
 
-	if newHandlers != nil && len(newHandlers) > 0 {
-		for _, newHandler := range newHandlers {
-			newHandler(entry)
+	if newEntryHandlers != nil && len(newEntryHandlers) > 0 {
+		for _, handler := range newEntryHandlers {
+			handler(entry)
 		}
 	}
 

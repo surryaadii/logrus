@@ -13,6 +13,11 @@ func StandardLogger() *Logger {
 	return std
 }
 
+// Set New Entry Handlers
+func SetNewEntryHandlers(newEntryHandlers ...NewEntryHandler) {
+	std.newEntryHandlers = newEntryHandlers
+}
+
 // SetOutput sets the standard logger output.
 func SetOutput(out io.Writer) {
 	std.mu.Lock()
