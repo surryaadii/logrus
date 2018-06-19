@@ -63,3 +63,7 @@ func (hook *RotatelogHook) SetFormatter(formatter logrus.Formatter) *RotatelogHo
 
 	return hook
 }
+
+func (hook *RotatelogHook) Close() error {
+	return hook.w.Close()
+}

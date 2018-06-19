@@ -95,6 +95,10 @@ func (p *panickyHook) Fire(entry *Entry) error {
 	return nil
 }
 
+func (p *panickyHook) Close() error {
+	return nil
+}
+
 func TestEntryHooksPanic(t *testing.T) {
 	logger := New()
 	logger.Out = &bytes.Buffer{}

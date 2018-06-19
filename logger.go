@@ -164,7 +164,7 @@ func (logger *Logger) Fatalf(format string, args ...interface{}) {
 		entry.Fatalf(format, args...)
 		logger.releaseEntry(entry)
 	}
-	Exit(1)
+	logger.Exit(1)
 }
 
 func (logger *Logger) Panicf(format string, args ...interface{}) {
@@ -227,7 +227,7 @@ func (logger *Logger) Fatal(args ...interface{}) {
 		entry.Fatal(args...)
 		logger.releaseEntry(entry)
 	}
-	Exit(1)
+	logger.Exit(1)
 }
 
 func (logger *Logger) Panic(args ...interface{}) {
@@ -290,7 +290,7 @@ func (logger *Logger) Fatalln(args ...interface{}) {
 		entry.Fatalln(args...)
 		logger.releaseEntry(entry)
 	}
-	Exit(1)
+	logger.Exit(1)
 }
 
 func (logger *Logger) Panicln(args ...interface{}) {
@@ -320,4 +320,9 @@ func (logger *Logger) AddHook(hook Hook) {
 	logger.mu.Lock()
 	defer logger.mu.Unlock()
 	logger.Hooks.Add(hook)
+}
+
+func (logger *Logger) Exit(code int) {
+	logger.Hooks.Close()
+	Exit(code)
 }

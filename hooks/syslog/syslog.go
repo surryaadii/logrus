@@ -53,3 +53,7 @@ func (hook *SyslogHook) Fire(entry *logrus.Entry) error {
 func (hook *SyslogHook) Levels() []logrus.Level {
 	return logrus.AllLevels
 }
+
+func (hook *SyslogHook) Close() error {
+	return nil
+}

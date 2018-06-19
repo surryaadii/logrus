@@ -27,6 +27,10 @@ func (hook *TestHook) Levels() []Level {
 	}
 }
 
+func (hook *TestHook) Close() error {
+	return nil
+}
+
 func TestHookFires(t *testing.T) {
 	hook := new(TestHook)
 
@@ -57,6 +61,11 @@ func (hook *ModifyHook) Levels() []Level {
 		FatalLevel,
 		PanicLevel,
 	}
+}
+
+func (hook *ModifyHook) Close() error {
+	return nil
+
 }
 
 func TestHookCanModifyEntry(t *testing.T) {
@@ -98,6 +107,10 @@ func (hook *ErrorHook) Levels() []Level {
 	return []Level{
 		ErrorLevel,
 	}
+}
+
+func (hook *ErrorHook) Close() error {
+	return nil
 }
 
 func TestErrorHookShouldntFireOnInfo(t *testing.T) {

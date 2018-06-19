@@ -8,6 +8,7 @@ package logrus
 type Hook interface {
 	Levels() []Level
 	Fire(*Entry) error
+	Close() error
 }
 
 // Internal type for storing the hooks on a logger instance.
@@ -27,6 +28,21 @@ func (hooks LevelHooks) Fire(level Level, entry *Entry) error {
 	for _, hook := range hooks[level] {
 		if err := hook.Fire(entry); err != nil {
 			return err
+		}
+	}
+
+	return nil
+}
+
+// Close close all hooks.
+func (hooks LevelHooks) Close() error {
+	records := make(map[Level]bool, len(AllLevels))
+	for level, allHooks := range hooks {
+		for _, hook := range allHooks {
+			if _, ok := records[level]; !ok {
+				records[level] = true
+				hook.Close()
+			}
 		}
 	}
 

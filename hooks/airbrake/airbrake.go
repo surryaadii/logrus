@@ -69,3 +69,7 @@ func (hook *AirbrakeHook) Levels() []logrus.Level {
 		logrus.PanicLevel,
 	}
 }
+
+func (hook *AirbrakeHook) Close() error {
+	return nil
+}

@@ -60,6 +60,10 @@ func (t *Hook) Levels() []logrus.Level {
 	return logrus.AllLevels
 }
 
+func (t *Hook) Close() error {
+	return nil
+}
+
 // LastEntry returns the last entry that was logged or nil.
 func (t *Hook) LastEntry() *logrus.Entry {
 	t.mu.RLock()

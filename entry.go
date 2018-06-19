@@ -174,7 +174,7 @@ func (entry *Entry) Fatal(args ...interface{}) {
 	if entry.Logger.level() >= FatalLevel {
 		entry.log(FatalLevel, fmt.Sprint(args...))
 	}
-	Exit(1)
+	entry.Logger.Exit(1)
 }
 
 func (entry *Entry) Panic(args ...interface{}) {
@@ -222,7 +222,7 @@ func (entry *Entry) Fatalf(format string, args ...interface{}) {
 	if entry.Logger.level() >= FatalLevel {
 		entry.Fatal(fmt.Sprintf(format, args...))
 	}
-	Exit(1)
+	entry.Logger.Exit(1)
 }
 
 func (entry *Entry) Panicf(format string, args ...interface{}) {
@@ -269,7 +269,7 @@ func (entry *Entry) Fatalln(args ...interface{}) {
 	if entry.Logger.level() >= FatalLevel {
 		entry.Fatal(entry.sprintlnn(args...))
 	}
-	Exit(1)
+	entry.Logger.Exit(1)
 }
 
 func (entry *Entry) Panicln(args ...interface{}) {

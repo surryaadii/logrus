@@ -20,9 +20,9 @@ var defaultFormatter = &logrus.TextFormatter{DisableColors: true}
 // Multiple levels may share a file, but multiple files may not be used for one level.
 type PathMap map[logrus.Level]string
 
-// WriterMap is map for mapping a log level to an io.Writer.
+// WriterMap is map for mapping a log level to an io.WriteCloser.
 // Multiple levels may share a writer, but multiple writers may not be used for one level.
-type WriterMap map[logrus.Level]io.Writer
+type WriterMap map[logrus.Level]io.WriteCloser
 
 // LfsHook is a hook to handle writing to local log files.
 type LfsHook struct {
@@ -33,14 +33,14 @@ type LfsHook struct {
 	formatter logrus.Formatter
 
 	defaultPath      string
-	defaultWriter    io.Writer
+	defaultWriter    io.WriteCloser
 	hasDefaultPath   bool
 	hasDefaultWriter bool
 }
 
 // NewHook returns new LFS hook.
-// Output can be a string, io.Writer, WriterMap or PathMap.
-// If using io.Writer or WriterMap, user is responsible for closing the used io.Writer.
+// Output can be a string, io.WriteCloser, WriterMap or PathMap.
+// If using io.WriteCloser or WriterMap, user is responsible for closing the used io.WriteCloser.
 func NewHook(output interface{}, formatter logrus.Formatter) (*LfsHook, error) {
 	hook := &LfsHook{
 		lock: new(sync.Mutex),
@@ -52,8 +52,8 @@ func NewHook(output interface{}, formatter logrus.Formatter) (*LfsHook, error) {
 	case string:
 		hook.SetDefaultPath(output.(string))
 		break
-	case io.Writer:
-		hook.SetDefaultWriter(output.(io.Writer))
+	case io.WriteCloser:
+		hook.SetDefaultWriter(output.(io.WriteCloser))
 		break
 	case PathMap:
 		hook.paths = output.(PathMap)
@@ -97,7 +97,7 @@ func (hook *LfsHook) SetDefaultPath(defaultPath string) {
 }
 
 // SetDefaultWriter sets default writer for levels that don't have any defined writer.
-func (hook *LfsHook) SetDefaultWriter(defaultWriter io.Writer) {
+func (hook *LfsHook) SetDefaultWriter(defaultWriter io.WriteCloser) {
 	hook.defaultWriter = defaultWriter
 	hook.hasDefaultWriter = true
 }
@@ -114,10 +114,10 @@ func (hook *LfsHook) Fire(entry *logrus.Entry) error {
 	return nil
 }
 
-// Write a log line to an io.Writer.
+// Write a log line to an io.WriteCloser.
 func (hook *LfsHook) ioWrite(entry *logrus.Entry) error {
 	var (
-		writer io.Writer
+		writer io.WriteCloser
 		msg    []byte
 		err    error
 		ok     bool
@@ -190,4 +190,19 @@ func (hook *LfsHook) fileWrite(entry *logrus.Entry) error {
 // Levels returns configured log levels.
 func (hook *LfsHook) Levels() []logrus.Level {
 	return logrus.AllLevels
+}
+
+func (hook *LfsHook) Close() error {
+	hook.lock.Lock()
+	defer hook.lock.Unlock()
+
+	if hook.defaultWriter != nil {
+		if err := hook.defaultWriter.Close(); err != nil {
+			return err
+		}
+
+		hook.defaultWriter = nil
+	}
+
+	return nil
 }
