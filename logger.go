@@ -31,8 +31,6 @@ type Logger struct {
 	mu MutexWrap
 	// Reusable empty entry
 	entryPool sync.Pool
-	// Used to initialization `Entry`.
-	newEntryHandlers []NewEntryHandler
 }
 
 type MutexWrap struct {
@@ -68,13 +66,12 @@ func (mw *MutexWrap) Disable() {
 //    }
 //
 // It's recommended to make this a global instance called `log`.
-func New(newEntryHandlers ...NewEntryHandler) *Logger {
+func New() *Logger {
 	return &Logger{
-		Out:              os.Stderr,
-		Formatter:        new(TextFormatter),
-		Hooks:            make(LevelHooks),
-		Level:            InfoLevel,
-		newEntryHandlers: newEntryHandlers,
+		Out:       os.Stderr,
+		Formatter: new(TextFormatter),
+		Hooks:     make(LevelHooks),
+		Level:     InfoLevel,
 	}
 }
 
@@ -89,11 +86,6 @@ func (logger *Logger) newEntry() *Entry {
 
 func (logger *Logger) releaseEntry(entry *Entry) {
 	logger.entryPool.Put(entry)
-}
-
-// Set New Entry Handlers
-func (logger *Logger) SetNewEntryHandlers(newEntryHandlers ...NewEntryHandler) {
-	logger.newEntryHandlers = newEntryHandlers
 }
 
 // Adds a field to the log entry, note that it doesn't log until you call

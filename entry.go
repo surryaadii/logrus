@@ -50,13 +50,11 @@ func NewEntry(logger *Logger) *Entry {
 		logger = New()
 	}
 
-	entry := &Entry{
+	return &Entry{
 		Logger: logger,
 		// Default is five fields, give a little extra room
 		Data: make(Fields, 5),
 	}
-
-	return runNewHandler(entry, entry.Logger.newEntryHandlers...)
 }
 
 // Returns the string representation from the reader and ultimately the
@@ -90,12 +88,10 @@ func (entry *Entry) WithFields(fields Fields) *Entry {
 		data[k] = v
 	}
 
-	newEntry := &Entry{
+	return &Entry{
 		Logger: entry.Logger,
 		Data:   data,
 	}
-
-	return runNewHandler(newEntry, entry.Logger.newEntryHandlers...)
 }
 
 // This function is not declared with a pointer value because otherwise

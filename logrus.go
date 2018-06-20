@@ -6,20 +6,6 @@ import (
 	"strings"
 )
 
-// Used to initialization `Entry`.
-type NewEntryHandler func(*Entry)
-
-// Run new entrn handler
-func runNewHandler(e *Entry, newEntryHandlers ...NewEntryHandler) *Entry {
-	if newEntryHandlers != nil && len(newEntryHandlers) > 0 {
-		for _, handler := range newEntryHandlers {
-			handler(e)
-		}
-	}
-
-	return e
-}
-
 // Fields type, used to pass to `WithFields`.
 type Fields map[string]interface{}
 
