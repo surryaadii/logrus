@@ -1,3 +1,7 @@
+# 2.0.2
+
+* Change NewEntry method
+
 # 2.0.1
 
 * Fix Entry WithFields bugs
