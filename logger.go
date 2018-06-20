@@ -84,7 +84,7 @@ func (logger *Logger) newEntry() *Entry {
 		return entry
 	}
 
-	return NewEntry(logger, logger.newEntryHandlers...)
+	return NewEntry(logger)
 }
 
 func (logger *Logger) releaseEntry(entry *Entry) {

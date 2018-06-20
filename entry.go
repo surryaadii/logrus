@@ -45,16 +45,18 @@ type Entry struct {
 	Buffer *bytes.Buffer
 }
 
-func NewEntry(logger *Logger, newEntryHandlers ...NewEntryHandler) *Entry {
+func NewEntry(logger *Logger) *Entry {
+	if logger == nil {
+		logger = New()
+	}
+
 	entry := &Entry{
 		Logger: logger,
 		// Default is five fields, give a little extra room
 		Data: make(Fields, 5),
 	}
 
-	entry.runNewHandler(entry, newEntryHandlers...)
-
-	return entry
+	return runNewHandler(entry, entry.Logger.newEntryHandlers...)
 }
 
 // Returns the string representation from the reader and ultimately the
@@ -88,19 +90,12 @@ func (entry *Entry) WithFields(fields Fields) *Entry {
 		data[k] = v
 	}
 
-	newEntry := &Entry{Logger: entry.Logger, Data: data}
-	entry.runNewHandler(newEntry, entry.Logger.newEntryHandlers...)
-
-	return newEntry
-}
-
-// Run new entrn handler
-func (entry *Entry) runNewHandler(e *Entry, newEntryHandlers ...NewEntryHandler) {
-	if newEntryHandlers != nil && len(newEntryHandlers) > 0 {
-		for _, handler := range newEntryHandlers {
-			handler(e)
-		}
+	newEntry := &Entry{
+		Logger: entry.Logger,
+		Data:   data,
 	}
+
+	return runNewHandler(newEntry, entry.Logger.newEntryHandlers...)
 }
 
 // This function is not declared with a pointer value because otherwise
