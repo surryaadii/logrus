@@ -317,6 +317,12 @@ func (logger *Logger) SetLevel(level Level) {
 	atomic.StoreUint32((*uint32)(&logger.Level), uint32(level))
 }
 
+func (logger *Logger) SetFormatter(formatter Formatter) {
+	logger.mu.Lock()
+	defer logger.mu.Unlock()
+	logger.Formatter = formatter
+}
+
 func (logger *Logger) AddHook(hook Hook) {
 	logger.mu.Lock()
 	defer logger.mu.Unlock()
