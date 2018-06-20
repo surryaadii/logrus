@@ -1,3 +1,7 @@
+# 2.0.4
+
+* Add SetFormatter method
+
 # 2.0.3
 
 * Remove NewEntryHandler defines
