@@ -1,3 +1,7 @@
+# 2.0.3
+
+* Remove NewEntryHandler defines
+
 # 2.0.2
 
 * Change NewEntry method
