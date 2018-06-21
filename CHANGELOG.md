@@ -1,3 +1,8 @@
+# 2.0.6
+
+* Rename GetLevel to GetBlockingLevel
+* Add Close method for Logger
+
 # 2.0.5
 
 * Add GetFormatter and GetLevel method
