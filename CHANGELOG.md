@@ -1,3 +1,7 @@
+# 2.0.5
+
+* Add GetFormatter and GetLevel method
+
 # 2.0.4
 
 * Add SetFormatter method
