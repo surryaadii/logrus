@@ -1,14 +1,14 @@
 # Local Filesystem Hook for Logrus
 
-[![GoDoc](https://godoc.org/github.com/jefurry/logrus/hooks/lfslog?status.svg)](http://godoc.org/github.com/jefurry/logrus/hooks/lfslog)
+[![GoDoc](https://godoc.org/"github.com/surryaadii/logrus"/hooks/lfslog?status.svg)](http://godoc.org/"github.com/surryaadii/logrus"/hooks/lfslog)
 
-Sometimes developers like to write directly to a file on the filesystem. This is a hook for [`logrus`](https://github.com/jefurry/logrus) which designed to allow users to do that. The log levels are dynamic at instantiation of the hook, so it is capable of logging at some or all levels.
+Sometimes developers like to write directly to a file on the filesystem. This is a hook for [`logrus`](https://"github.com/surryaadii/logrus") which designed to allow users to do that. The log levels are dynamic at instantiation of the hook, so it is capable of logging at some or all levels.
 
 ## Example
 ```go
 import (
-	"github.com/jefurry/logrus/hooks/lfslog"
-	"github.com/jefurry/logrus"
+	""github.com/surryaadii/logrus"/hooks/lfslog"
+	""github.com/surryaadii/logrus""
 )
 
 var Log *logrus.Logger
@@ -45,9 +45,9 @@ In combination with packages like [file-rotatelogs](https://github.com/lestrrat-
 package main
 
 import (
-	"github.com/jefurry/logrus/hooks/lfslog"
-	"github.com/jefurry/logrus"
-	rotatelog "github.com/jefurry/logrus/hooks/rotatelog"
+	""github.com/surryaadii/logrus"/hooks/lfslog"
+	""github.com/surryaadii/logrus""
+	rotatelog ""github.com/surryaadii/logrus"/hooks/rotatelog"
 )
 
 var Log *logrus.Logger

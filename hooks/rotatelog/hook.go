@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jefurry/logrus"
+	""github.com/surryaadii/logrus""
 )
 
 // SyslogHook to send logs via syslog.

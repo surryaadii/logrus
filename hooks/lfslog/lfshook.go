@@ -4,13 +4,14 @@ package lfslog
 import (
 	"errors"
 	"fmt"
-	"github.com/jefurry/logrus"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"reflect"
 	"sync"
+
+	"github.com/surryaadii/logrus"
 )
 
 // We are logging to file, strip colors to make the output more readable.

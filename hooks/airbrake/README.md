@@ -17,8 +17,8 @@ The hook must be configured with:
 ```go
 import (
     "log/syslog"
-    "github.com/jefurry/logrus"
-    "github.com/jefurry/logrus/hooks/airbrake" // the package is named "aibrake"
+    ""github.com/surryaadii/logrus""
+    ""github.com/surryaadii/logrus"/hooks/airbrake" // the package is named "aibrake"
     )
 
 func main() {
@@ -36,8 +36,8 @@ Note that if environment == "development", the hook will not send anything to ai
 ```go
 import (
     "log/syslog"
-    "github.com/jefurry/logrus"
-    "github.com/jefurry/logrus/hooks/airbrake" // the package is named "aibrake"
+    ""github.com/surryaadii/logrus""
+    ""github.com/surryaadii/logrus"/hooks/airbrake" // the package is named "aibrake"
     )
 
 func main() {
