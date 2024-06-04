@@ -1,6 +1,7 @@
 package logrus
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 )
@@ -32,6 +33,12 @@ type JSONFormatter struct {
 
 	// DisableTimestamp allows disabling automatic timestamps in output
 	DisableTimestamp bool
+
+	// DisableHTMLEscape allows disabling html escaping in output
+	DisableHTMLEscape bool
+
+	// PrettyPrint will indent all json logs
+	PrettyPrint bool
 
 	// FieldMap allows users to customize the names of keys for default fields.
 	// As an example:
@@ -71,9 +78,23 @@ func (f *JSONFormatter) Format(entry *Entry) ([]byte, error) {
 	data[f.FieldMap.resolve(FieldKeyMsg)] = entry.Message
 	data[f.FieldMap.resolve(FieldKeyLevel)] = entry.Level.String()
 
-	serialized, err := json.Marshal(data)
-	if err != nil {
-		return nil, fmt.Errorf("Failed to marshal fields to JSON, %v", err)
+	// serialized, err := json.Marshal(data)
+
+	var b *bytes.Buffer
+	if entry.Buffer != nil {
+		b = entry.Buffer
+	} else {
+		b = &bytes.Buffer{}
 	}
-	return append(serialized, '\n'), nil
+
+	encoder := json.NewEncoder(b)
+	encoder.SetEscapeHTML(!f.DisableHTMLEscape)
+	if f.PrettyPrint {
+		encoder.SetIndent("", "  ")
+	}
+	if err := encoder.Encode(data); err != nil {
+		return nil, fmt.Errorf("failed to marshal fields to JSON, %w", err)
+	}
+
+	return append(b.Bytes(), '\n'), nil
 }
