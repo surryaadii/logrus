@@ -6,7 +6,7 @@
 import (
   "time"
 
-  ""github.com/surryaadii/logrus""
+  "github.com/surryaadii/logrus"
   rlog ""github.com/surryaadii/logrus"/hooks/rotatelog"
 )
 

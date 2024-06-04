@@ -8,7 +8,7 @@ Sometimes developers like to write directly to a file on the filesystem. This is
 ```go
 import (
 	""github.com/surryaadii/logrus"/hooks/lfslog"
-	""github.com/surryaadii/logrus""
+	"github.com/surryaadii/logrus"
 )
 
 var Log *logrus.Logger
@@ -46,7 +46,7 @@ package main
 
 import (
 	""github.com/surryaadii/logrus"/hooks/lfslog"
-	""github.com/surryaadii/logrus""
+	"github.com/surryaadii/logrus"
 	rotatelog ""github.com/surryaadii/logrus"/hooks/rotatelog"
 )
 
