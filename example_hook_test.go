@@ -2,7 +2,7 @@ package logrus_test
 
 import (
 	"github.com/surryaadii/logrus"
-	""github.com/surryaadii/logrus"/hooks/airbrake"
+	"github.com/surryaadii/logrus/hooks/airbrake"
 	"os"
 )
 

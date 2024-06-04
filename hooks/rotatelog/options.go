@@ -3,7 +3,7 @@ package rotatelog
 import (
 	"time"
 
-	""github.com/surryaadii/logrus"/hooks/rotatelog/internal/option"
+	"github.com/surryaadii/logrus/hooks/rotatelog/internal/option"
 )
 
 const (

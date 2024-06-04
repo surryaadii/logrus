@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/surryaadii/logrus"
-	rotatelog ""github.com/surryaadii/logrus"/hooks/rotatelog"
+	rotatelog "github.com/surryaadii/logrus/hooks/rotatelog"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,4 +1,4 @@
-package airbrake // import ""github.com/surryaadii/logrus"/hooks/airbrake"
+package airbrake // import "github.com/surryaadii/logrus/hooks/airbrake"
 
 import (
 	"errors"

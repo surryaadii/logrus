@@ -220,8 +220,8 @@ Logrus comes with [built-in hooks](hooks/). Add those, or your custom hook, in
 ```go
 import (
   log "github.com/surryaadii/logrus"
-  ""github.com/surryaadii/logrus"/hooks/airbrake" // the package is named "airbrake"
-  logrus_syslog ""github.com/surryaadii/logrus"/hooks/syslog"
+  "github.com/surryaadii/logrus/hooks/airbrake" // the package is named "airbrake"
+  logrus_syslog "github.com/surryaadii/logrus/hooks/syslog"
   "log/syslog"
 )
 
@@ -409,7 +409,7 @@ Logrus has a built in facility for asserting the presence of log messages. This 
 ```go
 import(
   "github.com/surryaadii/logrus"
-  ""github.com/surryaadii/logrus"/hooks/test"
+  "github.com/surryaadii/logrus/hooks/test"
   "github.com/stretchr/testify/assert"
   "testing"
 )
